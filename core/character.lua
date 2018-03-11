@@ -56,6 +56,15 @@ function move_pc(pc)
         }
     end
 
+    local touches = love.touch.getTouches()
+    if table.getn(touches) > 0 then
+        local touch_x, touch_y = love.touch.getPosition(touches[0] or touches[1])
+        pc.moving = {
+            x=touch_x,
+            y=touch_y,
+        }
+    end
+
     if pc.moving then
         local pc_x = pc.x + (pc.width / 2)
         local pc_y = pc.y + pc.height

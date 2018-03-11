@@ -1,4 +1,4 @@
-cmd = require "commands"
+cmd = require "core/commands"
 
 function make_pc()
     return {
@@ -14,7 +14,7 @@ end
 
 function debug_move(pc)
     love.graphics.print('X:', 10, 20)
-    love.graphics.print(pc.x + math.floor(pc.width / 2), 30, 20)
+    love.graphics.print(pc.x + (pc.width / 2), 30, 20)
     love.graphics.print('Y:', 10, 40)
     love.graphics.print(pc.y + pc.height, 30, 40)
     love.graphics.print('Moving X:', 10, 60)
@@ -57,7 +57,7 @@ function move_pc(pc)
     end
 
     if pc.moving then
-        local pc_x = pc.x + math.floor(pc.width / 2)
+        local pc_x = pc.x + (pc.width / 2)
         local pc_y = pc.y + pc.height
         local max_x = cmd.get_max(pc.move, pc.moving.x, pc.moving.y, pc.x, pc.y)
         local max_y = cmd.get_max(pc.move, pc.moving.y, pc.moving.x, pc.y, pc.x)

@@ -36,11 +36,10 @@ end
 function get_max(max, to_move, to_compare, from_move, from_compare)
     local move_route = math.abs(from_move - to_move)
     local compare_route = math.abs(from_compare - to_compare)
-    if move_route < compare_route then
-        local steps = math.floor(compare_route / max)
-        local move = math.floor(move_route / steps)
-        if move == 0 then
-            return 1
+    if move_route < compare_route and (compare_route > max) then
+        local move = move_route / (compare_route / max)
+        if move < 1 then
+            return max
         end
         return move
     end

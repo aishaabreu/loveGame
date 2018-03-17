@@ -1,22 +1,18 @@
-local character = require 'core/character'
-local sti = require "plugins/sti"
+local world = require 'core/world'
+local utils = require 'core/utils'
 
-local player
-local world
-local map
+local prints = {}
 
 function love.load(arg)
-    player = character.make()
-    player.name = "Tedy"
+    world.make()
+end
 
-    world = love.physics.newWorld(0, 0)
-    map = sti("maps/map.lua", { "box2d" })
-    map:box2d_init(world)
+function love.update(dt)
+    world.update(dt, utils, prints)
 end
 
 function love.draw()
-    map:draw(0, 0)
-    map:box2d_draw(0, 0)
-    character.move(player)
-    character.draw(player)
+    world.draw()
+    utils.draw(prints)
+    prints = {}
 end

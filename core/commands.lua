@@ -1,56 +1,59 @@
-function left(player, move)
-    local to = player.x - move
-    if to >= 0 then
-        player.x = to
+function left( obj, move, min )
+    local to = obj.body:getX() - move
+    if to > min then
+        obj.body:setX(to)
+    else
+        obj.body:setX(min)
     end
 end
 
-function right(player, move)
-    local to = player.x + move
-    if to <= (love.graphics.getWidth() - player.width) then
-        player.x = to
+function right( obj, move, max )
+    local to = obj.body:getX() + move
+    if to < max then
+        obj.body:setX(to)
+    else
+        obj.body:setX(max)
     end
 end
 
-function up(player, move)
-    local to = player.y - move
-    if to >= 0 then
-        player.y = to
+function up( obj, move, min )
+    local to = obj.body:getY() - move
+    if to > min then
+        obj.body:setY(to)
+    else
+        obj.body:setY(min)
     end
 end
 
-function down(player, move)
-    local to = player.y + move
-    if to <= (love.graphics.getHeight() - player.height) then
-        player.y = to
+function down( obj, move, max )
+    local to = obj.body:getY() + move
+    if to < max then
+        obj.body:setY(to)
+    else
+        obj.body:setY(max)
     end
 end
 
-function get_move(move, max)
-    if move < max then
-        return move
-    end
-    return max
+function follow_screen( obj, map, screen )
+    screen.x = - (obj.body:getX() - ((love.graphics.getWidth() / 2) - (obj.w /2)))
+    screen.y = - (obj.body:getY() - ((love.graphics.getHeight() / 2) - (obj.h /2 )))
 end
 
-function get_max(max, to_move, to_compare, from_move, from_compare)
-    local move_route = math.abs(from_move - to_move)
-    local compare_route = math.abs(from_compare - to_compare)
-    if move_route < compare_route and (compare_route > max) then
-        local move = move_route / (compare_route / max)
-        if move < 1 then
-            return max
-        end
-        return move
+function move_obj( obj, map )
+    if love.keyboard.isDown('left', 'a') then
+        left(obj, 5, 0)
+    elseif love.keyboard.isDown('right', 'd') then
+        right(obj, 5, (map.width * map.tilewidth) - obj.w )
     end
-    return max
+
+    if love.keyboard.isDown('up', 'w') then
+        up(obj, 5, 0)
+    elseif love.keyboard.isDown('down', 's') then
+        down(obj, 5, (map.height * map.tileheight) - obj.h )
+    end
 end
 
 return {
-    left = left,
-    right = right,
-    up = up,
-    down = down,
-    get_move = get_move,
-    get_max = get_max
+    move=move_obj,
+    follow=follow_screen
 }

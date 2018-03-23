@@ -39,17 +39,17 @@ function follow_screen( obj, map, screen )
     screen.y = - (obj.body:getY() - ((love.graphics.getHeight() / 2) - (obj.h /2 )))
 end
 
-function move_obj( obj, map )
+function move_obj( dt, obj, map )
     if love.keyboard.isDown('left', 'a') then
-        left(obj, 5, 0)
+        left(obj, dt * 250, 0)
     elseif love.keyboard.isDown('right', 'd') then
-        right(obj, 5, (map.width * map.tilewidth) - obj.w )
+        right(obj, dt * 250, (map.width * map.tilewidth) - obj.w )
     end
 
     if love.keyboard.isDown('up', 'w') then
-        up(obj, 5, 0)
+        up(obj, dt * 250, 0)
     elseif love.keyboard.isDown('down', 's') then
-        down(obj, 5, (map.height * map.tileheight) - obj.h )
+        down(obj, dt * 250, (map.height * map.tileheight) - obj.h )
     end
 end
 

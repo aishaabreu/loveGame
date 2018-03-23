@@ -11,12 +11,13 @@ function love.load()
     love.window.setMode( 1024, 600, {fullscreen=false} )
     map = maps.make( 'maps/map.lua', world )
     player = character.make( world )
+    player.name = 'Italo'
     screen = {x=0, y=0}
 end
 
 function love.update( dt )
+    commands.move( dt, player, map )
     commands.follow( player, map, screen )
-    commands.move( player, map )
 end
 
 function love.draw()

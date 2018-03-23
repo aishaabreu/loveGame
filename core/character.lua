@@ -1,8 +1,8 @@
 function make_character( world )
     obj = {}
     obj.name="Character Name"
-    obj.w, obj.h = 48, 96
-    obj.body=love.physics.newBody( world, 0, 0, "dynamic" )
+    obj.w, obj.h = 32, 64
+    obj.body=love.physics.newBody( world, 1000, 1000, "dynamic" )
     obj.shape=love.physics.newRectangleShape( obj.w, obj.h )
     obj.fixture=love.physics.newFixture(obj.body, obj.shape, 1)
     return obj

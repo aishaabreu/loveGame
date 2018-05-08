@@ -34,7 +34,7 @@ function down( obj, move, max )
     end
 end
 
-function follow_screen( obj, map, screen )
+function screen_follow( obj, map, screen )
     screen.x = - (obj.body:getX() - ((love.graphics.getWidth() / 2) - (obj.w /2)))
     screen.y = - (obj.body:getY() - ((love.graphics.getHeight() / 2) - (obj.h /2 )))
 end
@@ -55,5 +55,5 @@ end
 
 return {
     move=move_obj,
-    follow=follow_screen
+    follow=screen_follow
 }

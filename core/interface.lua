@@ -1,9 +1,9 @@
-function make_element(name, keys, action, position, box)
+local elements = {}
+
+function make_element(action, position, box)
     local element = {
-        name=name,
         position=position,
         action=action,
-        keys=keys,
         box=box,
     }
 
@@ -16,10 +16,6 @@ function make_element(name, keys, action, position, box)
                 element.action()
             end 
         end
-
-        if love.keyboard.isDown(unpack(keys)) then
-            element.action()
-        end
     end
 
     element.draw = function()
@@ -29,9 +25,24 @@ function make_element(name, keys, action, position, box)
         love.graphics.setColor(r, g, b, a)
     end
 
+    table.insert(elements, element)
     return element
 end
 
+function call_elements()
+    for i, element in ipairs(elements) do
+        element.call()
+    end
+end
+
+function draw_elements()
+    for i, element in ipairs(elements) do
+        element.draw()
+    end
+end
+
 return {
-    make=make_element
+    make=make_element,
+    call=call_elements,
+    draw=draw_elements
 }

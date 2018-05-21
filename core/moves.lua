@@ -40,17 +40,18 @@ function screen_follow( obj, map, screen )
 end
 
 function move_obj( dt, obj, map )
-    if love.keyboard.isDown('left', 'a') then
-        left(obj, dt * 250, 0)
-    elseif love.keyboard.isDown('right', 'd') then
-        right(obj, dt * 250, (map.width * map.tilewidth) - obj.w )
+    for i, value in ipairs(obj._moves) do
+        if value == 'left' then
+            left(obj, dt * 250, 0)
+        elseif value == 'right' then
+            right(obj, dt * 250, (map.width * map.tilewidth) - obj.w )
+        elseif value == 'up' then
+            up(obj, dt * 250, 0)
+        elseif value == 'down' then
+            down(obj, dt * 250, (map.height * map.tileheight) - obj.h )
+        end
     end
-
-    if love.keyboard.isDown('up', 'w') then
-        up(obj, dt * 250, 0)
-    elseif love.keyboard.isDown('down', 's') then
-        down(obj, dt * 250, (map.height * map.tileheight) - obj.h )
-    end
+    obj._moves = {}
 end
 
 return {

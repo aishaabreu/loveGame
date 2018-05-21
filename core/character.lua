@@ -5,6 +5,10 @@ function make_character( world )
     obj.body=love.physics.newBody( world, 1000, 1000, "dynamic" )
     obj.shape=love.physics.newRectangleShape( obj.w, obj.h )
     obj.fixture=love.physics.newFixture(obj.body, obj.shape, 1)
+    obj._moves = {}
+    obj.move = function(move)
+        table.insert(obj._moves, move)
+    end
     return obj
 end
 

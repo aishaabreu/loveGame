@@ -7,7 +7,7 @@ function make_character( world )
     obj.fixture=love.physics.newFixture(obj.body, obj.shape, 1)
     obj._moves = {}
     obj.move = function(move)
-        table.insert(obj._moves, move)
+        obj._moves[move] = true
     end
     return obj
 end

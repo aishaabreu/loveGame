@@ -40,14 +40,14 @@ function screen_follow( obj, map, screen )
 end
 
 function move_obj( dt, obj, map )
-    for i, value in ipairs(obj._moves) do
-        if value == 'left' then
+    for key, value in pairs(obj._moves) do
+        if key == 'left' and value then
             left(obj, dt * 250, 0)
-        elseif value == 'right' then
+        elseif key == 'right' and value then
             right(obj, dt * 250, (map.width * map.tilewidth) - obj.w )
-        elseif value == 'up' then
+        elseif key == 'up' and value then
             up(obj, dt * 250, 0)
-        elseif value == 'down' then
+        elseif key == 'down' and value then
             down(obj, dt * 250, (map.height * map.tileheight) - obj.h )
         end
     end

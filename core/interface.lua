@@ -1,6 +1,8 @@
-local elements = {}
+function make_element(scene, action, position, box)
+    if not scene._elements then
+        scene._elements = {}
+    end
 
-function make_element(action, position, box)
     local element = {
         position=position,
         action=action,
@@ -25,18 +27,18 @@ function make_element(action, position, box)
         love.graphics.setColor(r, g, b, a)
     end
 
-    table.insert(elements, element)
+    table.insert(scene._elements, element)
     return element
 end
 
-function call_elements()
-    for i, element in ipairs(elements) do
+function call_elements( scene )
+    for i, element in ipairs(scene._elements) do
         element.call()
     end
 end
 
-function draw_elements()
-    for i, element in ipairs(elements) do
+function draw_elements( scene )
+    for i, element in ipairs(scene._elements) do
         element.draw()
     end
 end
